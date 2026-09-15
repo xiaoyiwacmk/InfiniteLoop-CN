@@ -375,6 +375,12 @@ namespace AscNet.Test
                     return;
                 }
 
+                if (args.Contains("--kuro-sdk-compat-only"))
+                {
+                    ValidateKuroSdkCompatibilityEndpoints().GetAwaiter().GetResult();
+                    return;
+                }
+
 
                 if (args.Contains("--theatre6-visibility-only"))
                 {
@@ -33191,11 +33197,9 @@ namespace AscNet.Test
                 [
                     new("/sdkcom/v2/login/emailPwd.lg", AssertKuroSdkLoginData),
                     new("/sdkcom/v2/login/third/steam.lg", AssertKuroSdkLoginData),
-                    new("/sdkcom/v2/login/auto.lg", AssertKuroSdkLoginData),
                     new("/sdkcom/v2/login/real-name/login.lg", AssertKuroSdkLoginData),
                     new("/sdkcom/v2/login/preambleCode.lg", AssertKuroSdkLoginData),
                     new("/sdkcom/v2/auth/getToken.lg", AssertKuroSdkAccessTokenData),
-                    new("/sdkcom/v2/user/oauth/code/generate.lg", AssertKuroSdkOauthCodeData),
                     new("/sdkcom/v2/user/game/role.lg", AssertKuroSdkEmptyData),
                     new("/sdkcom/v2/heartbeat/tokenCheck.lg", AssertKuroSdkEmptyData),
                     new("/sdkcom/v2/bind/device/status.lg", AssertKuroSdkEmptyData),
@@ -33408,7 +33412,10 @@ namespace AscNet.Test
             _ = RequiredNonEmptyString(clientUrlConfig, "emailSystemUrl", $"{endpoint} clientUrl");
             _ = RequiredNonEmptyString(clientUrlConfig, "bizsiren", $"{endpoint} clientUrl");
             AssertKuroSdkLocalLoginUrl(RequiredNonEmptyString(data, "pcThirdLoginUrl", endpoint), $"{endpoint} pcThirdLoginUrl");
-            _ = RequiredValue<int>(data, "thirdLogin", JTokenType.Integer, endpoint);
+            JObject thirdLogin = RequiredObject(data, "thirdLogin", endpoint);
+            AssertEqual(1, RequiredValue<int>(RequiredObject(thirdLogin, "phone", $"{endpoint} thirdLogin"), "enabled", JTokenType.Integer, $"{endpoint} thirdLogin phone"), $"{endpoint} thirdLogin phone enabled");
+            AssertEqual(1, RequiredValue<int>(RequiredObject(thirdLogin, "accLogin", $"{endpoint} thirdLogin"), "enabled", JTokenType.Integer, $"{endpoint} thirdLogin accLogin"), $"{endpoint} thirdLogin accLogin enabled");
+            AssertEqual(0, RequiredValue<int>(RequiredObject(thirdLogin, "accReg", $"{endpoint} thirdLogin"), "enabled", JTokenType.Integer, $"{endpoint} thirdLogin accReg"), $"{endpoint} thirdLogin accReg enabled");
             _ = RequiredNonEmptyString(data, "kefu", endpoint);
             _ = RequiredNonEmptyString(data, "kefuServ", endpoint);
             _ = RequiredValue<int>(data, "sobot", JTokenType.Integer, endpoint);

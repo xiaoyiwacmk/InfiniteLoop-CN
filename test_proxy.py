@@ -93,6 +93,31 @@ class ProxyRoutingTests(unittest.TestCase):
         self.assertEqual(9, flow.request.port)
         self.assertEqual("prod-encdn-tx.kurogame.net", flow.request.headers["X-Forwarded-Host"])
 
+    def test_cn_sdk_and_config_route_to_ascnet(self):
+        cases = (
+            ("sdkapi.kurogame.com", "/sdkcom/v2/login/accLogin.lg"),
+            ("prod-zspns-txcdn.kurogame.com", "/prod/client/config/key/com.kurogame.haru.kuro/4.7.0/standalone/config.tab"),
+        )
+
+        for host, path in cases:
+            with self.subTest(host=host, path=path):
+                flow = self.flow(path, host)
+                with patch.dict(os.environ, {"ASCNET_PROXY_TARGET": "http://127.0.0.1:9"}, clear=False):
+                    proxy.request(flow)
+
+                self.assertEqual("127.0.0.1", flow.request.host)
+                self.assertEqual(9, flow.request.port)
+                self.assertEqual(host, flow.request.headers["X-Forwarded-Host"])
+
+    def test_cn_telemetry_is_acknowledged_without_forwarding(self):
+        flow = self.flow("/ad-service/v1/sendEvent", "sdkapi.kurogame.com")
+
+        proxy.request(flow)
+
+        self.assertEqual(200, flow.response.status_code)
+        self.assertEqual(b"", flow.response.content)
+        self.assertEqual("sdkapi.kurogame.com", flow.request.host)
+
     def test_pgr_game_popup_notice_routes_to_ascnet(self):
         flow = self.flow(
             "/prod/client/notice/config/jmpyKTGE5zwaZ0O4/com.kurogame.punishing.grayraven.en/4.7.0/PopUpPicNotice.json",

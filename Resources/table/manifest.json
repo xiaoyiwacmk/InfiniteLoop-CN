@@ -3,6 +3,88 @@
   "sourceCommit": "c5a53f047bb72b3631d3798b06add7f9713c5589",
   "tables": [
     {
+      "columns": 2,
+      "contentSha256": "8c99cba7838d13501dd15dc0426bc3a678ea1b2ccff4f39b81f56dcab2aa3454",
+      "filter": "all",
+      "naturalKey": "Id",
+      "path": "share/statussyncfight/level/World.tsv",
+      "rows": 32,
+      "source": [
+        "/Volumes/Lucia/PGR-native-research/PGR_DATA/en/bytes/share/statussyncfight/level/World.json (sha256:f72f79b5f6183cdb6c7ac43bb52b173164e7f6147a67aacbf90a87125007980a)"
+      ],
+      "transformation": [
+        "imported Id and DefaultLevel for every authored row in source order; other columns omitted"
+      ]
+    },
+    {
+      "columns": 8,
+      "contentSha256": "e179bd818b50a6b5a6f9d307e19865f5999bb05c25e584058f8bbc38269d441a",
+      "filter": "all",
+      "naturalKey": "StageId",
+      "path": "client/theatre6/Theatre6StageDifficultyAuto.tsv",
+      "rows": 9,
+      "source": [
+        "EN installed resource/matrix/12fa065aea3e4df323686f48ef8866852404b997.uab (sha1:9c28ecbcc797953052a29d08febf7ebc6272e07a; document index identity matches; 9806 bytes)",
+        "TextAsset Theatre6StageDifficultyAuto.tab (sha1:432a10dde25a681a5fca4d44c4be3fd32f3f0e98)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "imported every decoded row and preserved authored array indexes",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
+      ]
+    },
+    {
+      "columns": 7,
+      "contentSha256": "75f0f6908eafcf278e0bc4e524cd05e4f171aadbb0b1fba6dac7935dc4c9b12b",
+      "filter": "all",
+      "naturalKey": "SanGroupId",
+      "path": "client/theatre6/Theatre6StageSanAuto.tsv",
+      "rows": 2,
+      "source": [
+        "EN installed resource/matrix/12fa065aea3e4df323686f48ef8866852404b997.uab (sha1:9c28ecbcc797953052a29d08febf7ebc6272e07a; document index identity matches; 9806 bytes)",
+        "TextAsset Theatre6StageSanAuto.tab (sha1:c84f1817fb9135e92da8467d941bf4d1c9fe9e03)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "imported every decoded row and preserved authored array indexes",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
+      ]
+    },
+    {
+      "columns": 2,
+      "contentSha256": "34e778a68195cc0cd7165fc2f5941ff7e4623dbdf44e89982c399e4935777970",
+      "filter": "all",
+      "naturalKey": "CharacterId",
+      "path": "client/theatre6/Theatre6StoryLineAuto.tsv",
+      "rows": 4,
+      "source": [
+        "EN installed resource/matrix/12fa065aea3e4df323686f48ef8866852404b997.uab (sha1:9c28ecbcc797953052a29d08febf7ebc6272e07a; document index identity matches; 9806 bytes)",
+        "TextAsset Theatre6StoryLineAuto.tab (sha1:b0030561243e3847732a2871ea072b1824a3b2fe)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "imported every decoded row and preserved authored array indexes",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
+      ]
+    },
+    {
+      "columns": 3,
+      "contentSha256": "bf2e41d78ffb00718759594d0c8e158933db466565ae0aded855f9d6af838f75",
+      "filter": "all",
+      "naturalKey": "Tag",
+      "path": "client/theatre6/Theatre6TagToBuff.tsv",
+      "rows": 1,
+      "source": [
+        "EN installed resource/matrix/12fa065aea3e4df323686f48ef8866852404b997.uab (sha1:9c28ecbcc797953052a29d08febf7ebc6272e07a; document index identity matches; 9806 bytes)",
+        "TextAsset Theatre6TagToBuff.tab (sha1:f409e7db7412ed064a08bfa0b87ed7d1f9aae589)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "imported every decoded row and preserved authored array indexes",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
+      ]
+    },
+    {
       "columns": 0,
       "contentSha256": null,
       "filter": "empty-source/no-schema/not-imported",
@@ -4727,36 +4809,57 @@
       ]
     },
     {
-      "columns": 28,
-      "contentSha256": "c7b0ab12ad4b5d620888813fd1c1c973647d40288ab19ae8a3de67ea670b28d2",
+      "columns": 32,
+      "contentSha256": "b1af519018b84b72e934a396e5969c10e05f43498b1b10ed5e0e39b495fd50b7",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6AttrPack.tsv",
       "rows": 90,
       "source": [
-        "share/theatre6/Theatre6AttrPack.json"
+        "share/theatre6/Theatre6AttrPack.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6AttrPack.tab (sha1:9313c29a569584ce0aaca6f4d107c6daee7d3912)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
-      "columns": 8,
-      "contentSha256": "c6211340d5467be743dfdc8df1d332d27809ef59202307cfb6aeab704ff2c1cc",
+      "columns": 9,
+      "contentSha256": "2204225a09df242c32e2fd73275822e266bf2377fe3fa0d6c017558d5ae6f61e",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6BuildTag.tsv",
       "rows": 20,
       "source": [
-        "share/theatre6/Theatre6BuildTag.json"
+        "share/theatre6/Theatre6BuildTag.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6BuildTag.tab (sha1:0de1bfc3f4e5f72e7675159e9ec33cfa8e39dfc0)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
-      "columns": 27,
-      "contentSha256": "9ce839cfd64adbb0f73074a682de822993bf660fe0793826be2ff34e692ea359",
+      "columns": 29,
+      "contentSha256": "5889df79ab6f170ba28beddc279a37312832dbf11eae197c740c4ce10e203547",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6Character.tsv",
       "rows": 9,
       "source": [
-        "share/theatre6/Theatre6Character.json"
+        "share/theatre6/Theatre6Character.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6Character.tab (sha1:5def644d514cc125338c88e913956b6cd6d6fdc4)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
@@ -4793,14 +4896,21 @@
       ]
     },
     {
-      "columns": 37,
-      "contentSha256": "8a582bfb3124ce842c70c6f66cc55e6f29e35412be67e6e0adba9e13b67a1a6c",
+      "columns": 40,
+      "contentSha256": "389500ce7ae00d895db654242d12d09c31b7e5849107dca1bea05dc54a1bcfa8",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6Monster.tsv",
       "rows": 256,
       "source": [
-        "share/theatre6/Theatre6Monster.json"
+        "share/theatre6/Theatre6Monster.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6Monster.tab (sha1:bb11a7c617fb64a2831421a5a5d7889979544d95)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
@@ -4826,69 +4936,111 @@
       ]
     },
     {
-      "columns": 33,
-      "contentSha256": "8076e5718e1dfcd27458dc6edad30dddbc1e5c5c1c3804ae505528e4f0844538",
+      "columns": 35,
+      "contentSha256": "7ab6f470969609d9748b680e0d41be567258f7f85022a01c5dd31db204f92230",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6Skill.tsv",
       "rows": 418,
       "source": [
-        "share/theatre6/Theatre6Skill.json"
+        "share/theatre6/Theatre6Skill.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6Skill.tab (sha1:2a1bafafcd13f4a7dc733ae598a1276f1f35cb37)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
       "columns": 3,
-      "contentSha256": "0fc03bf54e97a46fb55266007020821c6bc56e4be11ef894b5c185f9ee57c009",
+      "contentSha256": "b0488f0343b67ee2c751eed0c6ca768b3750f1d241c09cf6aca93bcf708d7209",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6SkillExtend.tsv",
-      "rows": 343,
+      "rows": 418,
       "source": [
-        "share/theatre6/Theatre6SkillExtend.json"
+        "share/theatre6/Theatre6SkillExtend.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6SkillExtend.tab (sha1:ff694935c757dcaeef81feb8ac6c6b22255891c7)",
+        "tools/decode_binary_table.py"
+      ],
+      "transformation": [
+        "preserved all 343 existing rows and cells; appended 75 installed rows with matching parent Skill IDs",
+        "all appended IsShowTags arrays are empty and remain blank indexed cells"
       ]
     },
     {
-      "columns": 25,
-      "contentSha256": "53daed5fc3d000d66b66026f5fcc679acb6362cfe10caf11686e235df8bab9d9",
+      "columns": 29,
+      "contentSha256": "5b5902cd5cfad7784c90fe014354f401f32123194ceb9e774f29b91ad632e6e7",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6Stage.tsv",
       "rows": 31,
       "source": [
-        "share/theatre6/Theatre6Stage.json"
+        "share/theatre6/Theatre6Stage.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6Stage.tab (sha1:23a2995b16761f3baad9c0538666781e6382fdfe)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
-      "columns": 22,
-      "contentSha256": "9119c53f3d64817e7366b422ac39955b79a8f432a496bb98880adbcab05b7f27",
+      "columns": 26,
+      "contentSha256": "b23a01c67c1c877dc72a55cca7ac52223f423c337bb55551645ec49753c95737",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6StageBuff.tsv",
       "rows": 79,
       "source": [
-        "share/theatre6/Theatre6StageBuff.json"
+        "share/theatre6/Theatre6StageBuff.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6StageBuff.tab (sha1:8f05f3a6a29dedf041d1fc61530af3b8b9864097)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
-      "columns": 4,
-      "contentSha256": "3f715e6ee6061e8e21bc32f73fc36709b14429d6a19bb36559b4bdca5b5a29fd",
+      "columns": 6,
+      "contentSha256": "b0dbd7d2f6f99113e7d89a5d37c2b9c8c48d81e5ff3e7fdc758f7b4b30fbd33a",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6StageBuffPool.tsv",
       "rows": 26,
       "source": [
-        "share/theatre6/Theatre6StageBuffPool.json"
+        "share/theatre6/Theatre6StageBuffPool.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6StageBuffPool.tab (sha1:507f37296b61d75af99363f09411a7ebf98d5559)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
-      "columns": 42,
-      "contentSha256": "f8c1523cd32def0fa7f18f04383564998efda9deb2eaec8214d9013a7439a26b",
+      "columns": 43,
+      "contentSha256": "17120bdf2d2d0ccd4c4e23d72fbee6034a8cfb94365f72a643f6a88c020e6ad6",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6StageChoose.tsv",
       "rows": 480,
       "source": [
-        "share/theatre6/Theatre6StageChoose.json"
+        "share/theatre6/Theatre6StageChoose.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6StageChoose.tab (sha1:7082985e18d93af1adb61b3eeeb8220e496998e9)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
@@ -4925,14 +5077,21 @@
       ]
     },
     {
-      "columns": 6,
-      "contentSha256": "71a4c03396479c5f0d68a84bec2dda20211cb867e1446b0aba3850248c66bc1c",
+      "columns": 8,
+      "contentSha256": "d792a6347f3b48fd69972633692110303024c0c4392ade18bbfbb0aea46ce6f8",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6StageDifficultyGroup.tsv",
       "rows": 3,
       "source": [
-        "share/theatre6/Theatre6StageDifficultyGroup.json"
+        "share/theatre6/Theatre6StageDifficultyGroup.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6StageDifficultyGroup.tab (sha1:91beee36c5a666eeb230c7056858d8a8d9c7365e)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
@@ -4947,25 +5106,39 @@
       ]
     },
     {
-      "columns": 17,
-      "contentSha256": "59643e5d58ed9e0ea92941e4d4efaa1cc9ac0239ff395f9ad75f0d72235e45d4",
+      "columns": 20,
+      "contentSha256": "3a204039c9cf75431658f5870a9003029bf662c27fc0749f48e6c590a017b270",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6StageFight.tsv",
       "rows": 133,
       "source": [
-        "share/theatre6/Theatre6StageFight.json"
+        "share/theatre6/Theatre6StageFight.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6StageFight.tab (sha1:42bc6d1b3ea7e0beaf0884143c51333449e0e536)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
-      "columns": 5,
-      "contentSha256": "0d7711959dc630b6ad5264910999def987609e3ddb16b920d677f9b0a9a3ffb2",
+      "columns": 7,
+      "contentSha256": "3de502f8bc70d639edfbc0589b2c80283fd56c1d50357bcfffab9ee87f046995",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6StageFightGroup.tsv",
       "rows": 83,
       "source": [
-        "share/theatre6/Theatre6StageFightGroup.json"
+        "share/theatre6/Theatre6StageFightGroup.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6StageFightGroup.tab (sha1:b592644a27b737cae023f22369d7d34539c32daa)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
@@ -4980,14 +5153,21 @@
       ]
     },
     {
-      "columns": 5,
-      "contentSha256": "3dcc3bcf3dd61d0623a665d9a402de5931c4c2b5bd77c9991eb68eefd10fd412",
+      "columns": 6,
+      "contentSha256": "756991bf7feab5aabf538f833fd41ad13ad59d0a8e4ed32e9175f0450af33e67",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6StageGoods.tsv",
       "rows": 4,
       "source": [
-        "share/theatre6/Theatre6StageGoods.json"
+        "share/theatre6/Theatre6StageGoods.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6StageGoods.tab (sha1:4f7fb8e8687fe7b920ba3c6fcc1ecfff5bf1665b)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
@@ -5002,36 +5182,57 @@
       ]
     },
     {
-      "columns": 15,
-      "contentSha256": "0aaed7203d4d0f6998a807973e6fc85122d26e78ecb064255de5b5559660f494",
+      "columns": 17,
+      "contentSha256": "482342f5b4bc83d1b5620f0acec8ac0ddf269eaf4ab700d430e587f232c45265",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6StageSan.tsv",
       "rows": 10,
       "source": [
-        "share/theatre6/Theatre6StageSan.json"
+        "share/theatre6/Theatre6StageSan.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6StageSan.tab (sha1:23f49111b065bd9d22d7612176dee6aecc2d0fd2)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
-      "columns": 13,
-      "contentSha256": "4b2529dff8acb42ed9348672c5c3fc406230a8b7fa209c5d11afaea0b1f9be80",
+      "columns": 14,
+      "contentSha256": "718a463bc53775e8ef415807efb95f5818f043e3fad2b9013999438a6c16e647",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6StageShop.tsv",
       "rows": 32,
       "source": [
-        "share/theatre6/Theatre6StageShop.json"
+        "share/theatre6/Theatre6StageShop.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6StageShop.tab (sha1:8d80cc3ab3445f8111cebb3aff537cc829b8451d)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
-      "columns": 12,
-      "contentSha256": "dd3032c5abaadde8859ee3a1c3ce60c29c9854a5f61395a3b6dac5a687e3807b",
+      "columns": 15,
+      "contentSha256": "6d0da620684c3d03396900aae3b999df4ae5b7912240b6249e79ce8b45b9fdba",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6StageTask.tsv",
       "rows": 135,
       "source": [
-        "share/theatre6/Theatre6StageTask.json"
+        "share/theatre6/Theatre6StageTask.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6StageTask.tab (sha1:7b9929df9ff15ea61a2e43ac790117eb4bdbfcb7)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
@@ -5046,36 +5247,57 @@
       ]
     },
     {
-      "columns": 2,
-      "contentSha256": "f396dfd1a7c5506d11d227ab2f3a91d73b69f497b53dcb16043f48876899ffad",
+      "columns": 4,
+      "contentSha256": "129ddf293e67842c1ab177e10f514a0ea66b01fcbf2d36cb81cb2f5d694d7026",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6StageTaskQuality.tsv",
       "rows": 5,
       "source": [
-        "share/theatre6/Theatre6StageTaskQuality.json"
+        "share/theatre6/Theatre6StageTaskQuality.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6StageTaskQuality.tab (sha1:5e7978744ad24b9e7bb32e41846cde427453be19)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
-      "columns": 2,
-      "contentSha256": "4d292f5c71e8b60ebc3417ad99a7552fcb41fbf6a02106b190db8a40ae8ab0db",
+      "columns": 3,
+      "contentSha256": "0206553a8dd711d743a80289b8d6d9fd4e99eeb77e320b90a52dcd5bf43b74d1",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6StoryDetail.tsv",
       "rows": 35,
       "source": [
-        "share/theatre6/Theatre6StoryDetail.json"
+        "share/theatre6/Theatre6StoryDetail.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6StoryDetail.tab (sha1:98d1986c3c63308513ccf6b76927aaa2b1efd1c9)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
-      "columns": 15,
-      "contentSha256": "6a7889c39936ee40fb9c60a95677bb5da3b34b79d018a11bcb47b6a4707eef99",
+      "columns": 17,
+      "contentSha256": "84b0e1c581da3a1d0e84e9abe07ec807525ce16f4bfe5112e28bfd74f010f014",
       "filter": "all",
       "naturalKey": "Id",
       "path": "share/theatre6/Theatre6StoryLine.tsv",
       "rows": 4,
       "source": [
-        "share/theatre6/Theatre6StoryLine.json"
+        "share/theatre6/Theatre6StoryLine.json",
+        "EN installed resource/matrix/4463a79aeabbd3b4d902d2aafb0b9d95dfa73779.uab (sha1:e05683c985969ba7fee59e64f88a3ea3b71b85ab; document index identity matches; 104188 bytes)",
+        "TextAsset Theatre6StoryLine.tab (sha1:59ff4f6edf8a30b956debd5c5298ca316d8ccf03)",
+        "tools/decode_binary_table.py with type4 string-list decoding (count followed by pooled string indices or null-terminated strings)"
+      ],
+      "transformation": [
+        "preserved every existing row and cell; appended missing installed schema columns only",
+        "empty arrays remain blank indexed cells; scalar numeric and boolean defaults are 0"
       ]
     },
     {
@@ -5263,11 +5485,11 @@
     },
     {
       "columns": 4,
-      "contentSha256": "6de39d587304696599104c98aaeadb56a3691f78eda21d1d4136bd0ec1e33af0",
-      "filter": "official-notice-feature-window-version-history-regional-client-entry-and-permanent-practice-derived; includes permanent BiancaTheatre TimeId28 (unbounded availability, not invented release timestamps) | Arcade Anima permanent towers: TimeIds 13101/13102/15101/17101/20401/34301 as unbounded (0,0) local-policy rows derived from CharacterTower.OpenTimeId; chapter TimeIds 20402/34301 deliberately not authored (promotional windows).",
+      "contentSha256": "df2960b7e4085d46a2dc8065cd6381b8c0e137c1ef21b9b0334244ed540029fe",
+      "filter": "official-notice-feature-window-version-history-regional-client-entry-and-permanent-practice-derived; includes permanent BiancaTheatre TimeId28 (unbounded availability, not invented release timestamps) | Arcade Anima permanent towers: TimeIds 13101/13102/15101/17101/20401/34301 as unbounded (0,0) local-policy rows derived from CharacterTower.OpenTimeId; chapter TimeIds 20402/34301 deliberately not authored (promotional windows). | Theatre6 timed missions: AscNet policy derives a missing server calendar from the single distinct authored reward-token lifetime via Theatre6Reward -> TaskTimeLimit -> Task -> Reward -> RewardGoods -> Item; TimeId47121 follows Item97087 (1780376400,1784178000), not a recovered retail shop window; existing PvP/rank windows 48601/48602 retain priority.",
       "naturalKey": "Id",
       "path": "share/activity/ActivitySchedule.tsv",
-      "rows": 42,
+      "rows": 43,
       "source": [
         "share/activity/EventCatalog.tsv",
         "Resources/Configs/Notices/4.7.0/{GameNotice,LoginNotice}.json",
@@ -5276,7 +5498,13 @@
         "regional-current-minor:{en,cn}/bytes/client/fuben/{FubenClientConfig,FubenActivityTimeTips}.json",
         "regional-current-minor:{en,cn}/bytes/share/fuben/FubenActivity.json",
         "share/theatre6pvp/Theatre6PvpActivity.json",
+        "share/theatre6pvp/Theatre6PvpRank.json",
         "client/theatre6/Theatre6ClientConfig.json",
+        "share/theatre6/Theatre6Reward.json",
+        "share/task/TaskTimeLimit.json",
+        "share/task/Task.json",
+        "share/reward/Reward.json",
+        "share/reward/RewardGoods.json",
         "share/item/Item.json",
         "share/miniactivity/musicgame/concertpreheating/ConcertPreHeatingActivity.json",
         "share/signin/SignIn.json",
@@ -6164,14 +6392,16 @@
       "naturalKey": "Id",
       "source": [
         "/Volumes/Lucia/PGR-native-research/PGR_DATA/en/bytes/share/scoretitle/ScoreTitle.json (sha256:0b439b126f3f2b009101ee51c7106a455c50d033c4a9e10ed51ce4b224cd7b4a)",
-        "EN BiancaTheatreLevelReward.RewardId + BiancaTheatreActivity.RewardIds + BiancaTheatreAchievement.TaskIds + BiancaTheatreTask.TaskId -> Task.RewardId -> Reward.SubIds -> RewardGoods.TemplateId -> ScoreTitle.Id"
+        "EN BiancaTheatreLevelReward.RewardId + BiancaTheatreActivity.RewardIds + BiancaTheatreAchievement.TaskIds + BiancaTheatreTask.TaskId -> Task.RewardId -> Reward.SubIds -> RewardGoods.TemplateId -> ScoreTitle.Id",
+        "EN Theatre6PvpRank Id=3/4/5 RewardId=69188/69189/69190 -> Reward.SubIds -> RewardGoods.TemplateId=13019727/13019728/13019729 -> ScoreTitle.Id"
       ],
       "columns": 8,
-      "rows": 9,
-      "contentSha256": "074371d6b3a7ee132028bab6cbfca97c33d1e1dbe1dd9d6cea40219310f2dfa2",
-      "filter": "existing rows preserved; preserve existing rows; add missing Cursed Waves level/activity-achievement/task reward title closure; runtime-consumed original columns only; absent quality conditions remain empty | Arcade Anima collectible closure: RewardGoods.TemplateId 13019202/13019204/13019404/13019606/13019614/13019669 -> ScoreTitle (InitQuality 5, no quality conditions), authorized by Main",
+      "rows": 13,
+      "contentSha256": "d2449483f3aa905dc79c76c39e119be691014cc3a0eabb18645300742a58ac24",
+      "filter": "existing rows preserved; preserve existing rows; add missing Cursed Waves level/activity-achievement/task reward title closure; runtime-consumed original columns only; absent quality conditions remain empty | Arcade Anima collectible closure: RewardGoods.TemplateId 13019202/13019204/13019404/13019606/13019614/13019669 -> ScoreTitle (InitQuality 5, no quality conditions), authorized by Main | Theatre6PvP rank reward closure: add ScoreTitle 13019727/13019728/13019729 with authored InitQuality 5 and no quality conditions/qualities; preserve all 10 preexisting rows",
       "transformation": [
-        "Existing rows and schema preserved; new rows carry Id + InitQuality only; absent quality conditions/qualities remain empty."
+        "Existing rows and schema preserved; new rows carry Id + InitQuality only; absent quality conditions/qualities remain empty.",
+        "Theatre6PvP title grants consume no Condition rows: each added title has zero quality-condition/quality pairs; GrantScoreTitle uses the authored InitQuality directly."
       ]
     },
     {

@@ -777,7 +777,8 @@ namespace AscNet.GameServer.Handlers
                 FubenData = new()
                 {
                     StageData = BuildLoginStageData(session),
-                    FubenBaseData = new()
+                    FubenBaseData = new(),
+                    UnlockHideStages = FightModule.BuildUnlockedHideStages(session.stage)
                 },
                 IsSetFightCgEnable = true,
                 FubenMainLineData = session.player.FubenMainLineData,
@@ -1266,6 +1267,8 @@ namespace AscNet.GameServer.Handlers
 
         static void DoLogin(Session session, bool updateLoginAccounting)
         {
+            // Recover the frozen outcome before login accounting can save the player's document.
+            Theatre6Module.ResumePending(session, forLogin: true);
             long currentTime = DateTimeOffset.Now.ToUnixTimeSeconds();
             long previousLastLoginTime = session.player.PlayerData.LastLoginTime;
             if (updateLoginAccounting)
@@ -1274,7 +1277,6 @@ namespace AscNet.GameServer.Handlers
             RepairProfileCosmeticRewards(session);
             session.player.NormalizeTeamPrefabs();
             session.ClampPlayerLevelToConfiguredMaximum();
-            Theatre6Module.ReconcileAvailability(session.player, DateTimeOffset.UtcNow);
             (ActivityResultNotify? arenaResult, NotifyArenaActivity arenaActivity) = ArenaModule.ReconcileLogin(session);
             StrongholdModule.PrepareLogin(session.player);
             if (PartnerModule.RefreshArchive(session.player, session.character))
@@ -1290,6 +1292,8 @@ namespace AscNet.GameServer.Handlers
             Theatre3Module.PrepareLogin(session);
             Theatre4Module.PrepareLogin(session);
             Theatre5Module.PrepareLogin(session);
+            Theatre6Module.PrepareLogin(session);
+            Theatre6PvpModule.RecoverPendingDefense(session);
             NotifyLogin notifyLogin = BuildNotifyLogin(session);
 
 
@@ -1396,10 +1400,12 @@ namespace AscNet.GameServer.Handlers
             SendEmptyStartupPush(session, "NotifyDlcChipFormDataList");
             SendEmptyStartupPush(session, "NotifyDlcChipAssistChipId");
             session.SendPush(Theatre5Module.BuildLoginData(session));
-            SendCurrentEventTaskBatch(session, CurrentEventTaskBatchTheatre6);
             NotifyTheatre6ActivityData? theatre6Data = Theatre6Module.BuildNotify(session.player);
             if (theatre6Data is not null)
+            {
                 session.SendPush(theatre6Data);
+                Theatre6Module.PushLoginExtras(session);
+            }
             session.SendPush(session.character.BuildNameplateLoginData());
             SendEmptyStartupPush(session, "NotifyGuildDormPlayerData");
             session.SendPush(BuildChatBoardLoginData(session.player));

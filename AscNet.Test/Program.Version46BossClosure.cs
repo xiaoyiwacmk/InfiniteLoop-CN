@@ -136,6 +136,8 @@ internal partial class Program
         PreFightResponse response = ReadResponsePayload<PreFightResponse>(
             harness, packetId, nameof(PreFightResponse), "Intensive challenge PreFight");
         AssertEqual(0, response.Code, "registered Intensive challenge PreFight is actionable");
+        AssertEqual(true, response.FightData!.Restartable,
+            "Intensive challenge PreFight reports the authored stage restart permission");
     }
 
     private static void ValidateBossInshotEarlyLineupRejection(

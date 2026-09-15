@@ -26,7 +26,7 @@ namespace AscNet.Common.Database
     {
         public static readonly List<CharacterLevelUpTemplate> characterLevelUpTemplates;
         public static readonly List<EquipLevelUpTemplate> equipLevelUpTemplates;
-        public static readonly IMongoCollection<Character> collection = Common.db.GetCollection<Character>("characters");
+        public static IMongoCollection<Character> collection = Common.db.GetCollection<Character>("characters");
         private static readonly Lazy<HashSet<int>> ownableCharacterIds = new(() =>
         {
             HashSet<int> ids = TableReaderV2.Parse<CharacterTable>()

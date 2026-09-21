@@ -96,18 +96,26 @@ namespace AscNet.SDKServer.Controllers
 
             app.MapGet("/api/Login/Login", ([FromQuery] int loginType, [FromQuery] int userId, [FromQuery] string token, [FromQuery] string? clientIp) =>
             {
+                const string initialStage = "account-token-lookup";
+                string stage = initialStage;
+                Account? account = null;
                 try
                 {
-                    Account? account = Account.FromToken(token);
+                    account = Account.FromToken(token);
 
                     if (account is null)
+                    {
+                        stage = "fallback-account-lookup";
                         account = GateFallbackAccount();
+                    }
 
                     if (account is null)
                         return InvalidLoginToken();
 
+                    stage = "player-load-or-create";
                     Player player = Player.FromPlayerId(account.Uid);
 
+                    stage = "gate-response-serialization";
                     LoginGate gate = new()
                     {
                         Code = 0,
@@ -120,7 +128,12 @@ namespace AscNet.SDKServer.Controllers
                 }
                 catch (Exception ex)
                 {
-                    SDKServer.log.Error($"Gate login lookup failed: {ex.GetType().Name}");
+                    string accountDetails = account is null
+                        ? "localAccount=none"
+                        : $"localUid={account.Uid}, localUsername={account.Username}";
+                    SDKServer.log.Error(
+                        $"Gate login lookup failed during {stage}: loginType={loginType}, userId={userId}, {accountDetails}.",
+                        ex);
                     return InvalidLoginToken();
                 }
             });

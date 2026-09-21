@@ -313,7 +313,9 @@ namespace AscNet.GameServer
                             }
                             catch (Exception ex)
                             {
-                                log.Error($"Failed to invoke handler: type={(int)packet.Type}, contentBytes={packet.Content?.Length ?? 0}, error={ex.GetType().Name}");
+                                log.Error(
+                                    $"Failed to invoke handler: type={(int)packet.Type}, contentBytes={packet.Content?.Length ?? 0}, error={ex.GetType().Name}",
+                                    ex);
                             }
                         }
                     }

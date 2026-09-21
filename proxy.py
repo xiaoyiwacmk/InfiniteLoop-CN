@@ -13,6 +13,7 @@ def load(loader):
     ctx.options.ignore_hosts = [
         r".*sdk-prod-cdn-aws\.kurogame-service\.(com|xyz).*",
         r".*qcloud-sg-datareceiver\.kurogame\.xyz.*",
+        r".*ali-sh-datareceiver\.kurogame\.xyz.*",
         r".*mp-gb-sdklog\.kurogames\.net.*",
         r".*events\.appsflyer\.com.*",
         r"pgr\.kurogame\.net:443",
@@ -56,6 +57,7 @@ def _log_flow(prefix, flow):
     path = _flow_log_path()
     if not path:
         return
+
     status = getattr(flow.response, "status_code", "-") if getattr(flow, "response", None) else "-"
     line = f"{prefix} {flow.request.method} {_diagnostic_url(flow.request.pretty_url)} -> {status}\n"
     with open(path, "a", encoding="utf-8") as handle:
@@ -63,10 +65,70 @@ def _log_flow(prefix, flow):
 
 
 def _is_ascnet_host(host):
+    if not host:
+        return False
+
+    host = host.lower().split(":", 1)[0]
     return host and (
-        host in {"sdkapi.kurogame-service.com", "sdkapi.kurogame-service.xyz"}
-        or (host.startswith(("prod-encdn-", "prod-twcdn-")) and host.endswith(".kurogame.net"))
+        host in {
+            "sdkapi.kurogame-service.com",
+            "sdkapi.kurogame-service.xyz",
+            "sdkapi.kurogame.com",
+            "sdkapi.kurogame.net",
+            "sdkapi.kurogame.xyz",
+            "accounts.tapapis.cn",
+            "haru-gf-login.kurogame.com",
+            "haru-gf-pay.kurogame.com",
+        }
+        or (host.startswith("prod-encdn-") and host.endswith(".kurogame.net"))
+        or host in {
+            "prod-zspnsalicdn.kurogame.com",
+            "prod-zspnstxcdn.kurogame.com",
+            "prod-zspns-txcdn.kurogame.com",
+            "zspnsprod.oss-cn-shenzhen.aliyuncs.com",
+            "zspnsprod.oss-accelerate.aliyuncs.com",
+            "zspnsdlprod.kurogame.com",
+        }
     )
+
+
+def _is_ascnet_sni_host(host):
+    if not host:
+        return False
+
+    host = host.lower().split(":", 1)[0]
+    return host in {
+        "sdkapi.kurogame-service.com",
+        "sdkapi.kurogame-service.xyz",
+        "sdkapi.kurogame.com",
+        "sdkapi.kurogame.net",
+        "sdkapi.kurogame.xyz",
+        "accounts.tapapis.cn",
+        "haru-gf-login.kurogame.com",
+        "haru-gf-pay.kurogame.com",
+    }
+
+
+def _is_upstream_cdn_asset_request(flow):
+    path = flow.request.path.split("?", 1)[0]
+    return path.startswith("/prod/client/patch/")
+
+def _is_upstream_notice_html_request(flow):
+    path = flow.request.path.split("?", 1)[0]
+    return (
+        _is_ascnet_host(flow.request.pretty_host)
+        and path.startswith("/prod/client/notice/html/")
+    )
+
+def _is_upstream_notice_config_request(flow):
+    path = flow.request.path.split("?", 1)[0]
+    return (
+        _is_ascnet_host(flow.request.pretty_host)
+        and path.startswith("/prod/client/notice/config/")
+        and path.endswith(".json")
+    )
+
+
 def _is_pgr_game_popup_notice_request(flow):
     host = flow.request.pretty_host
     path = flow.request.path.split("?", 1)[0]
@@ -78,22 +140,32 @@ def _is_pgr_game_popup_notice_request(flow):
         and path.endswith("/PopUpPicNotice.json")
     )
 
-
-
-def _is_upstream_notice_html_request(flow):
+def _is_upstream_notice_pic_request(flow):
     path = flow.request.path.split("?", 1)[0]
     return (
         _is_ascnet_host(flow.request.pretty_host)
-        and path.startswith("/prod/client/notice/html/")
+        and path.startswith("/prod/client/notice/pic/")
+        and path.endswith((".png", ".jpg", ".jpeg", ".webp", ".gif"))
     )
-
 
 def _is_ascnet_gate_request(flow):
     return flow.request.path.split("?", 1)[0] == "/api/Login/Login"
 
 
 def _is_feedback_request(flow):
-    return flow.request.pretty_host in {"prod.enzspnslog.kurogame.com", "prod.twzspnslog.kurogame.com"} and flow.request.path.split("?", 1)[0] == "/feedback"
+    return flow.request.pretty_host in {
+        "prod.enzspnslog.kurogame.com",
+        "prod-zspnslog.kurogame.com",
+        "prod.twzspnslog.kurogame.com",
+    } and flow.request.path.split("?", 1)[0] == "/feedback"
+
+
+def _is_telemetry_request(flow):
+    return (
+        flow.request.path.split("?", 1)[0].startswith("/ad-service/")
+        or flow.request.pretty_host == "prod-zspnslog.zspms-game.com"
+    )
+
 
 def _is_wildcard_connect_request(flow):
     return flow.request.method == "CONNECT" and _is_local_wildcard_host(flow.request.pretty_host)
@@ -101,7 +173,7 @@ def _is_wildcard_connect_request(flow):
 
 def _is_wildcard_ascnet_request(flow):
     path = flow.request.path.split("?", 1)[0]
-    return _is_local_wildcard_host(flow.request.pretty_host) and path.startswith(("/api/", "/prod/", "/sdkcom/"))
+    return _is_local_wildcard_host(flow.request.pretty_host) and path.startswith(("/api/", "/prod/", "/sdkcom/", "/sdk/", "/entrypoint.json"))
 
 
 def _is_tw_config_request(flow):
@@ -123,9 +195,6 @@ def _ascnet_origin():
 
 
 def _rewrite_login_url(value, target_origin):
-    # ServerListStr/ChannelServerListStr are `label#url` / `default#label#url`.
-    # Keep labels and metadata, replace only the final URL's origin with the
-    # local AscNet target while preserving its path.
     head, sep, url = value.rpartition("#")
     parsed = urlparse(url)
     if not (sep and parsed.scheme and parsed.hostname):
@@ -149,8 +218,11 @@ def next_layer(nextlayer: layer.NextLayer):
     # Only mark hosts we intend to rewrite. HTTPS proxying is intentionally
     # avoided for pinned KRSDK/service hosts by the runner/environment.
     sni = nextlayer.context.client.sni
-    if _is_ascnet_host(sni):
+    if _is_ascnet_sni_host(sni):
         ctx.log.info("ascnet candidate sni:" + sni)
+        _scheme, host, port = _ascnet_target()
+        nextlayer.context.server.address = (host, port)
+        ctx.log.info(f"ascnet routed sni:{sni} -> {host}:{port}")
 
 
 def http_connect(flow: http.HTTPFlow) -> None:
@@ -170,6 +242,11 @@ def http_connect(flow: http.HTTPFlow) -> None:
 def request(flow: http.HTTPFlow) -> None:
     _log_flow("REQ", flow)
 
+    if _is_telemetry_request(flow):
+        flow.response = http.Response.make(200, b"", {})
+        _log_flow("SINK", flow)
+        return
+
     if _is_feedback_request(flow):
         flow.response = http.Response.make(200, b"OK", {"Content-Type": "text/plain"})
         _log_flow("SINK", flow)
@@ -181,10 +258,13 @@ def request(flow: http.HTTPFlow) -> None:
         _log_flow("PASS", flow)
         return
 
-    # TW config carries authoritative upstream metadata (doc/launch version,
-    # channel, CDN list) that local AscNet does not reproduce. Let it pass
-    # through to the real CDN unchanged; response() rewrites only the login
-    # endpoints to the local target.
+    if _is_upstream_notice_pic_request(flow):
+        _log_flow("PASS", flow)
+        return
+
+    if _is_upstream_cdn_asset_request(flow):
+        return
+
     if _is_tw_config_request(flow):
         _log_flow("PASS", flow)
         return
@@ -208,9 +288,6 @@ def request(flow: http.HTTPFlow) -> None:
 def response(flow: http.HTTPFlow) -> None:
     _log_flow("RSP", flow)
 
-    # TW config was passed through upstream unchanged. Rewrite only the login
-    # endpoint URLs to the local target so the client reaches local AscNet,
-    # keeping all authoritative metadata (version, channel, CDNs, labels).
     if not _is_tw_config_request(flow) or flow.response is None:
         return
 

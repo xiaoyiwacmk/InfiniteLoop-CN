@@ -386,8 +386,8 @@ namespace AscNet.SDKServer.Controllers
             return package switch
             {
                 "com.kurogame.haru.kuro" => (
-                    "http://prod-zspnsalicdn.kurogame.com/prod",
-                    "http://prod-zspnstxcdn.kurogame.com/prod",
+                    "http://prod-zspns-txcdn.kurogame.com/prod",
+                    "http://prod-zspns-txcdn.kurogame.com/prod",
                     2),
                 "com.kurogame.punishing.grayraven.en" or "com.kurogame.gplay.punishing.grayraven.en" when currentClient => (
                     "http://prod-encdn-ak.pgr-game.com/prod",

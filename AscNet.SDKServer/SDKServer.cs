@@ -76,7 +76,7 @@ namespace AscNet.SDKServer
                 }
                 catch (Exception ex)
                 {
-                    log.Error($"Request failed: {ex.GetType().Name}");
+                    log.Error($"Request failed: {ex.GetType().Name}", ex);
                     throw;
                 }
                 finally
